@@ -20,6 +20,22 @@ const routes = [
     path: '/test',
     name: 'test',
     component: TestView,
+  },
+  {
+    path: '/search-by-title',
+    component:()=>import('../views/SearchByTitle.vue')
+  },
+  {
+    path: '/search-by-actor',
+    component: () => import('../views/SearchByActor.vue')
+  },
+  {
+    path: '/search-by-director',
+    component: () => import('../views/SearchByDirector.vue')
+  },
+  {
+    path: '/search-by-time',
+    component: () => import('../views/SearchByTime.vue')
   }
 ]
 
