@@ -36,6 +36,22 @@ const routes = [
   {
     path: '/search-by-time',
     component: () => import('../views/SearchByTime.vue')
+  },
+  {
+    path: '/search-by-genre',
+    component: () => import('../views/SearchByGenre.vue')
+  },
+  {
+    path: '/search-by-relationship',
+    component: () => import('../views/SearchByRelationship.vue')
+  },
+  {
+    path: '/search-by-rate',
+    component: () => import('../views/SearchByRate.vue')
+  },
+  {
+    path: '/most-popular',
+    component: () => import('../views/MostPopular.vue')
   }
 ]
 

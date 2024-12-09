@@ -24,6 +24,10 @@ function minimize_win() {
       <button @click="navigateTo('/search-by-actor')">按演员名称查询</button>
       <button @click="navigateTo('/search-by-director')">按导演名称查询</button>
       <button @click="navigateTo('/search-by-time')">按时间查询</button>
+      <button @click="navigateTo('/search-by-genre')">按类型查询</button>
+      <button @click="navigateTo('/search-by-relationship')">按关系查询</button>
+      <button @click="navigateTo('/search-by-rate')">按评分查询</button>
+      <button @click="navigateTo('/most-popular')">查询最受关注的组合</button>
       <!-- 更多选项可在此处添加 -->
     </div>
   </div>
