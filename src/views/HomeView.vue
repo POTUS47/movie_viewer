@@ -62,6 +62,14 @@ export default {
   height: 100vh;
 }
 
+.options {
+  display: flex;
+  flex-wrap: wrap; /* 让按钮换行 */
+  justify-content: center; /* 按钮水平居中 */
+  max-width: 80%; /* 限制最大宽度为父容器的 80% */
+  margin: 0 auto; /* 水平居中 */
+}
+
 .options button {
   margin: 10px;
   padding: 10px 20px;
