@@ -219,7 +219,7 @@ const performSearchneo = () => {
 // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 const performSearchHive = () => {
   // 构建 API 请求 URL
-  const apiUrl1 = `http://47.97.59.189:5000/search_by_title/${searchQuery.value}`;
+  const apiUrl1 = `http://127.0.0.1:5000/search_by_title_hive/${searchQuery.value}`;
 
   fetch(apiUrl1)
     .then(response => response.json())

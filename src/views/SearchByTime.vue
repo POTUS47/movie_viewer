@@ -299,7 +299,7 @@ const performSearchneo = async () => {
 
 // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 const performSearchHive = async () => {
-    let apiUrl2 = new URL(`http://47.97.59.189:5000/search_by_time`);
+    let apiUrl2 = new URL(`http://127.0.0.1:5000/search_by_time_hive`);
     const params = new URLSearchParams({
         type: queryType.value,
         ...(showYearInput.value && { year: year.value }),

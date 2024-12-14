@@ -263,7 +263,7 @@ const performSearchneo = () => {
 // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 const performSearchHive = () => {
   // 构建 API 请求 URL
-  const apiUrl2 = `http://47.97.59.189:5000/search_every_director/${searchQuery.value}`;
+  const apiUrl2 = `http://127.0.0.1:5000/search_every_director_hive/${searchQuery.value}`;
 
   fetch(apiUrl2)
     .then(response => response.json())
@@ -347,7 +347,7 @@ const Neo4jSearchMoviesByDirector = (directorName) => {
 
 // 改成正确URL！！！！！！！！！
 const HiveSearchMoviesByDirector = (directorName) => {
-  const apiUrl = `http://47.97.59.189:5000/search_by_director/${directorName}`;
+  const apiUrl = `http://127.0.0.1:5000/search_by_director_hive/${directorName}`;
 
   fetch(apiUrl)
     .then(response => response.json())
