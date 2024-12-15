@@ -255,7 +255,7 @@ const performSearchneo = () => {
 
 //改成正确的URL！！！！！！！！！！！！！！！！！！！！
 const performSearchHive = () => {
-    let apiUrl2 = new URL(`http://47.97.59.189:5000/search_by_rate`);
+    let apiUrl2 = new URL(`http://127.0.0.1:5000/search_by_rate_hive`);
 
     // 构建查询参数
     const params = new URLSearchParams({

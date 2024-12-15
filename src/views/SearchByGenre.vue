@@ -262,7 +262,7 @@
   // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
   const performSearchHive = () => {
     // 构建 API 请求 URL
-    const apiUrl2 = `http://47.97.59.189:5000/search_every_genre/${searchQuery.value}`;
+    const apiUrl2 = `http://127.0.0.1:5000/search_every_genre_hive/${searchQuery.value}`;
   
     fetch(apiUrl2)
       .then(response => response.json())
@@ -346,7 +346,7 @@
   
   // 改成正确URL！！！！！！！！！
   const HiveSearchMoviesByGenre = (genreName) => {
-    const apiUrl = `http://47.97.59.189:5000/search_by_genre/${genreName}`;
+    const apiUrl = `http://127.0.0.1:5000/search_by_genre_hive/${genreName}`;
   
     fetch(apiUrl)
       .then(response => response.json())
