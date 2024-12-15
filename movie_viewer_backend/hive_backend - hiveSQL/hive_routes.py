@@ -160,7 +160,12 @@ def search_every_director_hive(name):
         cursor.execute(query)
         results = cursor.fetchall()
         columns = [desc[0] for desc in cursor.description]
-        result_dicts = [dict(zip(columns, row)) for row in results]
+
+        # 清理和格式化结果
+        result_dicts = [
+            {'director_name': row[0].strip()}
+            for row in results
+        ]
 
         # 记录查询结束时间
         end_time = time.time()
@@ -171,14 +176,17 @@ def search_every_director_hive(name):
         conn.close()
 
         # 如果没有找到任何导演，返回空结果
-        if not results:
-            return jsonify({'results': [], 'query_time': f"{query_time:.6f} seconds"}), 200
+        if not result_dicts:
+            return jsonify({
+                'query_time': f"{query_time:.6f}",
+                'results': []
+            }), 200
 
         # 返回查询结果和查询时间
         return jsonify({
-            'results': [row['director_name'] for row in result_dicts],  # 使用字典的列名访问
-            'query_time': f"{query_time:.6f} seconds"
-        })
+            'query_time': f"{query_time:.6f}",
+            'results': result_dicts
+        }), 200
 
     except Exception as err:
         # 捕获其他数据库连接或查询错误
@@ -270,8 +278,12 @@ def search_every_actor_hive(name):
         # 执行查询并获取结果
         cursor.execute(query)
         results = cursor.fetchall()
-        columns = [desc[0] for desc in cursor.description]
-        result_dicts = [dict(zip(columns, row)) for row in results]
+
+        # 清理和格式化结果
+        result_dicts = [
+            {'actor_name': row[0].strip()}
+            for row in results
+        ]
 
         # 记录查询结束时间
         end_time = time.time()
@@ -282,14 +294,17 @@ def search_every_actor_hive(name):
         conn.close()
 
         # 如果没有找到任何演员，返回空结果
-        if not results:
-            return jsonify({'results': [], 'query_time': f"{query_time:.6f} seconds"}), 200
+        if not result_dicts:
+            return jsonify({
+                'query_time': f"{query_time:.6f}",
+                'results': []
+            }), 200
 
         # 返回查询结果和查询时间
         return jsonify({
-            'results': [row['actor_name'] for row in result_dicts],  # 使用字典的列名访问
-            'query_time': f"{query_time:.6f} seconds"
-        })
+            'query_time': f"{query_time:.6f}",
+            'results': result_dicts
+        }), 200
 
     except Exception as err:
         # 捕获其他数据库连接或查询错误
@@ -356,7 +371,7 @@ def search_by_actor_hive(name):
 
 def search_every_genre_hive(name):
     if not name:
-        return jsonify({'error': 'genre name is required'}), 400
+        return jsonify({'error': 'Genre name is required'}), 400
 
     try:
         # 获取Hive连接
@@ -380,8 +395,12 @@ def search_every_genre_hive(name):
         # 执行查询并获取结果
         cursor.execute(query)
         results = cursor.fetchall()
-        columns = [desc[0] for desc in cursor.description]
-        result_dicts = [dict(zip(columns, row)) for row in results]
+
+        # 清理和格式化结果
+        result_dicts = [
+            {'genre_name': row[0].strip()}
+            for row in results
+        ]
 
         # 记录查询结束时间
         end_time = time.time()
@@ -391,15 +410,18 @@ def search_every_genre_hive(name):
         cursor.close()
         conn.close()
 
-        # 如果没有找到任何演员，返回空结果
-        if not results:
-            return jsonify({'results': [], 'query_time': f"{query_time:.6f} seconds"}), 200
+        # 如果没有找到任何类型，返回空结果
+        if not result_dicts:
+            return jsonify({
+                'query_time': f"{query_time:.6f}",
+                'results': []
+            }), 200
 
         # 返回查询结果和查询时间
         return jsonify({
-            'results': [row['genre_name'] for row in result_dicts],  # 使用字典的列名访问
-            'query_time': f"{query_time:.6f} seconds"
-        })
+            'query_time': f"{query_time:.6f}",
+            'results': result_dicts
+        }), 200
 
     except Exception as err:
         # 捕获其他数据库连接或查询错误

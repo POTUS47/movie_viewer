@@ -45,8 +45,6 @@ def search_by_title_hive(title):
         print(f"Something went wrong: {err}")
         return jsonify({'error': 'Database error'}), 500
 
-
-
 def search_by_time_hive():
     query_type = request.args.get('type')
     year = request.args.get('year')
@@ -146,38 +144,50 @@ def search_every_director_hive(name):
 
     try:
         spark = get_spark_session()
+
+        # 防止单引号导致SQL错误
+        save_name = name.replace("'", "''")
+
         # 记录查询开始时间
         start_time = time.time()
 
         query = f"""
             SELECT DISTINCT director_name
             FROM Director
-            WHERE director_name = '{name}'
-               OR director_name LIKE '{name} %'
-               OR director_name LIKE '% {name}'
+            WHERE director_name = '{save_name}'
+               OR director_name LIKE '{save_name} %'
+               OR director_name LIKE '% {save_name}'
         """
 
         director_names_df = spark.sql(query)
-        director_names = director_names_df.collect()
+
+        # 将结果转换为字典列表，确保每一项都是 {'director_name': value} 的形式
+        director_names = [
+            {'director_name': row.director_name.strip()}
+            for row in director_names_df.collect()
+        ]
 
         # 记录查询结束时间
         end_time = time.time()
         query_time = end_time - start_time
 
+        # 如果没有找到任何导演，返回空结果
         if not director_names:
-            return jsonify({'results': [], 'query_time': query_time}), 200
+            return jsonify({
+                'query_time': query_time,
+                'results': []
+            }), 200
 
         # 返回查询结果和查询时间
         return jsonify({
-            'results': [row['director_name'] for row in director_names],  # 使用字典的列名访问
-            'query_time': query_time
-        })
+            'query_time': query_time,
+            'results': director_names
+        }), 200
 
     except Exception as err:
         # 捕获其他数据库连接或查询错误
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
-
 
 def search_by_director_hive(name):
     if not name:
@@ -223,45 +233,56 @@ def search_by_director_hive(name):
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
 
-
 def search_every_actor_hive(name):
     if not name:
         return jsonify({'error': 'Actor name is required'}), 400
 
     try:
         spark = get_spark_session()
+
+        # 防止单引号导致SQL错误
+        save_name = name.replace("'", "''")
+
         # 记录查询开始时间
         start_time = time.time()
 
         query = f"""
             SELECT DISTINCT actor_name
             FROM Actor
-            WHERE actor_name = '{name}'
-               OR actor_name LIKE '{name} %'
-               OR actor_name LIKE '% {name}'
+            WHERE actor_name = '{save_name}'
+               OR actor_name LIKE '{save_name} %'
+               OR actor_name LIKE '% {save_name}'
         """
 
         actor_names_df = spark.sql(query)
-        actor_names = actor_names_df.collect()
+
+        # 将结果转换为字典列表，确保每一项都是 {'actor_name': value} 的形式
+        actor_names = [
+            {'actor_name': row.actor_name.strip()}
+            for row in actor_names_df.collect()
+        ]
 
         # 记录查询结束时间
         end_time = time.time()
         query_time = end_time - start_time
 
+        # 如果没有找到任何演员，返回空结果
         if not actor_names:
-            return jsonify({'results': [], 'query_time': query_time}), 200
+            return jsonify({
+                'query_time': query_time,
+                'results': []
+            }), 200
 
         # 返回查询结果和查询时间
         return jsonify({
-            'results': [row['actor_name'] for row in actor_names],  # 使用字典的列名访问
-            'query_time': query_time
-        })
+            'query_time': query_time,
+            'results': actor_names
+        }), 200
 
     except Exception as err:
         # 捕获其他数据库连接或查询错误
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
-
 
 def search_by_actor_hive(name):
     if not name:
@@ -307,45 +328,56 @@ def search_by_actor_hive(name):
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
 
-
 def search_every_genre_hive(name):
     if not name:
-        return jsonify({'error': 'genre name is required'}), 400
+        return jsonify({'error': 'Genre name is required'}), 400
 
     try:
         spark = get_spark_session()
+
+        # 防止单引号导致SQL错误
+        save_name = name.replace("'", "''")
+
         # 记录查询开始时间
         start_time = time.time()
 
         query = f"""
-             SELECT DISTINCT genre_name
-             FROM Movie_Genre
-             WHERE genre_name = '{name}'
-                OR genre_name LIKE '{name} %'
-                OR genre_name LIKE '% {name}'
-         """
+            SELECT DISTINCT genre_name
+            FROM Movie_Genre
+            WHERE genre_name = '{save_name}'
+               OR genre_name LIKE '{save_name} %'
+               OR genre_name LIKE '% {save_name}'
+        """
 
         genre_names_df = spark.sql(query)
-        genre_names = genre_names_df.collect()
+
+        # 将结果转换为字典列表，确保每一项都是 {'genre_name': value} 的形式
+        genre_names = [
+            {'genre_name': row.genre_name.strip()}
+            for row in genre_names_df.collect()
+        ]
 
         # 记录查询结束时间
         end_time = time.time()
         query_time = end_time - start_time
 
+        # 如果没有找到任何类型，返回空结果
         if not genre_names:
-            return jsonify({'results': [], 'query_time': query_time}), 200
+            return jsonify({
+                'query_time': query_time,
+                'results': []
+            }), 200
 
         # 返回查询结果和查询时间
         return jsonify({
-            'results': [row['genre_name'] for row in genre_names],  # 使用字典的列名访问
-            'query_time': query_time
-        })
+            'query_time': query_time,
+            'results': genre_names
+        }), 200
 
     except Exception as err:
         # 捕获其他数据库连接或查询错误
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
-
 
 def search_by_genre_hive(name):
     if not name:
@@ -390,7 +422,6 @@ def search_by_genre_hive(name):
         # 捕获其他数据库连接或查询错误
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
-
 
 def relation_actor_actor_hive(name):
     if not name:
@@ -454,7 +485,6 @@ def relation_actor_actor_hive(name):
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
 
-
 def relation_director_actor_hive(name):
     if not name:
         return jsonify({'error': 'director name is required'}), 400
@@ -511,7 +541,6 @@ def relation_director_actor_hive(name):
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
 
-
 def relation_actor_director_hive(name):
     if not name:
         return jsonify({'error': 'actor name is required'}), 400
@@ -567,7 +596,6 @@ def relation_actor_director_hive(name):
         # 捕获其他数据库连接或查询错误
         print(f"Error: {err}")
         return jsonify({'error': 'Database query failed'}), 500
-
 
 def search_by_rate_hive():
     min_rating = request.args.get('min_rating')
