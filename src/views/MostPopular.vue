@@ -268,7 +268,7 @@ const Neo4jSearchGroups = (genreName) => {
 
 // 改成正确URL！！！！！！！！！
 const HiveSearchGroups = (genreName) => {
-    const apiUrl2 = `http://47.97.59.189:5000/search_actor_combinations_by_genre/${(genreName)}`;
+    const apiUrl2 = `http://127.0.0.1:5000/search_actor_combinations_by_genre_hive/${(genreName)}`;
     fetch(apiUrl2)
         .then(response => response.json())
         .then(data => {

@@ -329,10 +329,10 @@ const performSearchHive = () => {
     let apiUrl2 = '';
     if (queryType.value === 'actor') {
         apiUrl2 = actorQueryOption.value === 'co-actor'
-            ? `http://47.97.59.189:5000/relation_actor_actor/${entityName.value}`
-            : `http://47.97.59.189:5000/relation_actor_director/${entityName.value}`;
+            ? `http://127.0.0.1:5000/relation_actor_actor_hive/${entityName.value}`
+            : `http://127.0.0.1:5000/relation_actor_director_hive/${entityName.value}`;
     } else if (queryType.value === 'director') {
-        apiUrl2 = `http://47.97.59.189:5000/relation_director_actor/${entityName.value}`;
+        apiUrl2 = `http://127.0.0.1:5000/relation_director_actor_hive/${entityName.value}`;
     }
 
     fetch(apiUrl2)
