@@ -42,11 +42,11 @@ def search_by_title_hive(title):
         start_time = time.time()
         # 执行查询并获取结果
         result_df = spark.sql(query)
+
+        result_info = result_df.collect()
         # 记录查询结束时间
         end_time = time.time()
         query_time = end_time - start_time
-
-        result_info = result_df.collect()
         results = [row.asDict() for row in result_info]
 
         # 返回查询结果和查询时间
