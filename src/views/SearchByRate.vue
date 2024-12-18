@@ -14,6 +14,18 @@
             <button @click="performSearch">搜索</button>
         </div>
 
+        <!-- 展示查询时间对比 -->
+        <div v-if="processRunning" class="query-time-comparison">
+            <div class="chart-area">
+                <canvas id="queryTimeChart"></canvas> <!-- 图表 -->
+            </div>
+            <div class="text-area">
+                <p><strong>MySQL 查询时间: </strong>{{ queryTimeMysql }} 秒</p>
+                <p><strong>Neo4j 查询时间: </strong>{{ queryTimeNeo4j }} 秒</p>
+                <p><strong>Hive 查询时间: </strong>{{ queryTimeHive }} 秒</p>
+            </div>
+        </div>
+
         <div v-if="loading" class="loading">
             <p>正在加载...</p>
         </div>
@@ -204,7 +216,7 @@ const performSearchmysql = () => {
                 throw new Error(data.error);
             }
             mysqlSearchResults.value = data.results; // 获取查询结果
-            queryTimeMysql.value = data.query_time|| 0;   // 获取查询时间
+            queryTimeMysql.value = data.query_time || 0;   // 获取查询时间
             // 检查结果是否有值并更新 hasResult
             if (data.results && data.results.length > 0) {
                 hasResult.value = true;
