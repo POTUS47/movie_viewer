@@ -95,7 +95,7 @@ def search_by_time():
 
     if query_type == 'year':
         sql = """
-            SELECT m.movie_name,m.release_date,m.average_score
+            SELECT m.movie_id,m.movie_name,m.release_date,m.average_score
             FROM Movie_Fact m
             JOIN Time_Dimension t ON m.release_date = t.release_date
             WHERE t.year = %s
@@ -103,7 +103,7 @@ def search_by_time():
         cursor.execute(sql, (year,))
     elif query_type == 'month':
         sql = """
-            SELECT m.movie_name,m.release_date,m.average_score
+            SELECT m.movie_id,m.movie_name,m.release_date,m.average_score
             FROM Movie_Fact m
             JOIN Time_Dimension t ON m.release_date = t.release_date
             WHERE t.year = %s AND t.month = %s
@@ -111,7 +111,7 @@ def search_by_time():
         cursor.execute(sql, (year, month))
     elif query_type == 'quarter':
         sql = """
-            SELECT m.movie_name,m.release_date,m.average_score
+            SELECT m.movie_id,m.movie_name,m.release_date,m.average_score
             FROM Movie_Fact m
             JOIN Time_Dimension t ON m.release_date = t.release_date
             WHERE t.year = %s AND t.quarter = %s
@@ -119,7 +119,7 @@ def search_by_time():
         cursor.execute(sql, (year, quarter))
     elif query_type == 'weekday':
         sql = """
-            SELECT m.movie_name,m.release_date,m.average_score
+            SELECT m.movie_id,m.movie_name,m.release_date,m.average_score
             FROM Movie_Fact m
             JOIN Time_Dimension t ON m.release_date = t.release_date
             WHERE t.year = %s AND t.month = %s AND t.day_of_week = %s
@@ -600,54 +600,95 @@ def relation_actor_director(name):
     
 
 def search_by_rate():
-    min_rating = request.args.get('min_rating')
-    max_rating = request.args.get('max_rating')
+    return
+    # min_rating = request.args.get('min_rating')
+    # max_rating = request.args.get('max_rating')
 
-    if not min_rating or not max_rating:
-        return jsonify({'error': 'Min and Max rating are required'}), 400
+    # if not min_rating or not max_rating:
+    #     return jsonify({'error': 'Min and Max rating are required'}), 400
 
-    try:
-        min_rating = float(min_rating)
-        max_rating = float(max_rating)
-        
-        if min_rating > max_rating:
-            return jsonify({'error': 'Min rating cannot be greater than max rating'}), 400
-        
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
-        
-        # 记录查询开始时间
-        start_time = time.time()
-        
-        query = """
-        SELECT movie_id, movie_name, average_score AS rate
-        FROM Movie_Fact
-        WHERE average_score BETWEEN %s AND %s
-        ORDER BY average_score DESC
-        """
-        
-        cursor.execute(query, (min_rating, max_rating))
-        results = cursor.fetchall()
-        
-        # 记录查询结束时间
-        end_time = time.time()
-        query_time = end_time - start_time
-        
-        cursor.close()
-        conn.close()
-        
-        # 返回查询结果和查询时间
-        return jsonify({
-            'results': results,
-            'query_time': query_time
-        })
+    # # try:
+    # print("1")
+    # min_rating = float(min_rating)
+    # max_rating = float(max_rating)
     
-    except ValueError:
-        return jsonify({'error': 'Invalid rating values'}), 400
-    except mysql.connector.Error as err:
-        print(f"Database error: {err}")
-        return jsonify({'error': 'Database error'}), 500
+    # if min_rating > max_rating:
+    #     return jsonify({'error': 'Min rating cannot be greater than max rating'}), 400
     
+    # conn = get_db_connection()
+    # cursor = conn.cursor(dictionary=True)
+    # print("2")
+    # # 记录查询开始时间
+    # start_time = time.time()
+    
+    # query = """
+    # SELECT movie_id, movie_name, average_score AS rate
+    # FROM Movie_Fact
+    # WHERE average_score BETWEEN %s AND %s
+    # ORDER BY average_score DESC
+    # """
+    
+    # cursor.execute(query, (min_rating, max_rating))
+    # print("3")
+    # results = cursor.fetchall()
+    
+    # # 记录查询结束时间
+    # end_time = time.time()
+    # query_time = end_time - start_time
+    
+    # cursor.close()
+    # conn.close()
+    # print("4")
+    # # 返回查询结果和查询时间
+    # return jsonify({
+    #     'results': results,
+    #     'query_time': query_time
+    # })
+    
+    # except ValueError:
+    #     return jsonify({'error': 'Invalid rating values'}), 400
+    # except mysql.connector.Error as err:
+    #     print(f"Database error: {err}")
+    #     return jsonify({'error': 'Database error'}), 500
+    
+
+def get_movies_by_score():
+    min_score = request.args.get('min_rating', type=float)
+    max_score = request.args.get('max_rating', type=float)
+
+    if min_score is None or max_score is None:
+        return jsonify({'error': 'Min and Max score parameters are required.'}), 400
+
+    # 连接到数据库
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+     # 记录查询开始时间
+    start_time = time.time()
+
+    query ="""
+                SELECT movie_id, movie_name, average_score AS rate 
+                FROM Movie_Fact 
+                WHERE average_score BETWEEN %s AND %s
+            """
+    
+    cursor.execute(query,(min_score,max_score))
+    results = cursor.fetchall()
+
+    # 记录查询结束时间
+    end_time = time.time()
+    query_time = end_time - start_time
+
+    cursor.close()
+    conn.close()
+
+    # 返回查询结果和查询时间
+    return jsonify({
+        'results': results,
+        'query_time': query_time
+    })
+
+
 
 def search_actor_combinations_by_genre(genre_name):
     if not genre_name:

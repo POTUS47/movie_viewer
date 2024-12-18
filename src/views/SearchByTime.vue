@@ -80,7 +80,7 @@
                 <div v-for="(result, index) in getSearchResults" :key="index" class="movie-card"
                     @click="showMovieVersions(result.movie_id)">
                     <h4>{{ result.movie_name }}</h4>
-                    <p>电影ID: {{ result.movie_id }}</p>
+                    <!-- <p>电影ID: {{ result.movie_id }}</p> -->
                     <p>平均评分: {{ result.average_score }}</p>
                     <p>上映日期: {{ formatDate(result.release_date) }}</p>
                 </div>

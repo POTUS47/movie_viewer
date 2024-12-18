@@ -108,7 +108,7 @@ let chart = null; // Chart.js 图表实例
 const hasResult = ref(false);
 
 const minRating = ref(0); // 最低评分
-const maxRating = ref(10); // 最高评分
+const maxRating = ref(5); // 最高评分
 
 // 监听 processRunning 变化，准备渲染图表
 watch(processRunning, (newVal) => {

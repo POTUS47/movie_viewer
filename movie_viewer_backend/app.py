@@ -20,8 +20,9 @@ app.add_url_rule('/search_by_genre/<string:name>', view_func=search_by_genre, me
 app.add_url_rule('/relation_actor_actor/<string:name>', view_func=relation_actor_actor, methods=['GET'])
 app.add_url_rule('/relation_actor_director/<string:name>', view_func=relation_actor_director, methods=['GET'])
 app.add_url_rule('/relation_director_actor/<string:name>', view_func=relation_director_actor, methods=['GET'])
-app.add_url_rule('/search_by_rate', view_func=search_by_rate, methods=['GET'])
+app.add_url_rule('/get_movies_by_score/', view_func=search_by_rate, methods=['GET'])
 app.add_url_rule('/search_actor_combinations_by_genre/<string:genre_name>', view_func=search_actor_combinations_by_genre, methods=['GET'])
+app.add_url_rule('/search_by_rate/',view_func=get_movies_by_score,methods=['GET'])
 
 
 # 注册 Neo4j 查询路由
