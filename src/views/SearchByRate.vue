@@ -233,7 +233,7 @@ const performSearchmysql = () => {
 
 //改成正确的URL！！！！！！！！！！！！！！！！！！！！
 const performSearchneo = () => {
-    let apiUrl1 = new URL(`http://47.97.59.189:5000/search_by_rate`);
+    let apiUrl1 = new URL(`http://47.97.59.189:5000/search_by_rate_neo4j`);
 
     // 构建查询参数
     const params = new URLSearchParams({

@@ -268,7 +268,7 @@ const performSearchmysql = async () => {
 
 // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 const performSearchneo = async () => {
-    let apiUrl1 = new URL(`http://47.97.59.189:5000/search_by_time`);
+    let apiUrl1 = new URL(`http://47.97.59.189:5000/search_by_time_neo4j`);
     const params = new URLSearchParams({
         type: queryType.value,
         ...(showYearInput.value && { year: year.value }),

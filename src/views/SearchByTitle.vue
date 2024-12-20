@@ -200,8 +200,7 @@ const performSearchmysql = () => {
 // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 const performSearchneo = () => {
   // 构建 API 请求 URL
-  //const apiUrl = `http://47.97.59.189:5000/search_by_title_neo4j/${searchQuery.value}`;
-  const apiUrl = `http://47.97.59.189:5000/search_by_title/${searchQuery.value}`;
+  const apiUrl = `http://47.97.59.189:5000/search_by_title_neo4j/${searchQuery.value}`;
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {

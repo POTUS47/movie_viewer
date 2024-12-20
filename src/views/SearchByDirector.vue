@@ -244,8 +244,7 @@ const performSearchmysql = () => {
 // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 const performSearchneo = () => {
   // 构建 API 请求 URL
-  //const apiUrl = `http://47.97.59.189:5000/search_by_title_neo4j/${searchQuery.value}`;
-  const apiUrl = `http://47.97.59.189:5000/search_every_director/${searchQuery.value}`;
+  const apiUrl = `http://47.97.59.189:5000/search_every_director_neo4j/${searchQuery.value}`;
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
@@ -324,7 +323,7 @@ const SqlSearchMoviesByDirector = (directorName) => {
 
 // 改成正确的URL！！！！！！！！！！！！！！！！！
 const Neo4jSearchMoviesByDirector = (directorName) => {
-  const apiUrl = `http://47.97.59.189:5000/search_by_director/${directorName}`;
+  const apiUrl = `http://47.97.59.189:5000/search_by_director_neo4j/${directorName}`;
 
   fetch(apiUrl)
     .then(response => response.json())

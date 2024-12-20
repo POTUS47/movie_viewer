@@ -244,7 +244,7 @@ const performSearchmysql = () => {
 // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 const performSearchneo = () => {
   // 构建 API 请求 URL
-  const apiUrl = `http://47.97.59.189:5000/search_every_actor/${searchQuery.value}`;
+  const apiUrl = `http://47.97.59.189:5000/search_every_actor_neo4j/${searchQuery.value}`;
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
@@ -300,7 +300,7 @@ const searchMoviesByActor = (actorName) => {
 
 // 显示演员的电影
 const SqlSearchMoviesByActor = (actorName) => {
-  const apiUrl = `http://47.97.59.189:5000/search_by_director/${actorName}`;
+  const apiUrl = `http://47.97.59.189:5000/search_by_actor/${actorName}`;
 
   fetch(apiUrl)
     .then(response => response.json())
@@ -323,7 +323,7 @@ const SqlSearchMoviesByActor = (actorName) => {
 
 // 改成正确的URL！！！！！！！！！！！！！！！！！
 const Neo4jSearchMoviesByActor = (actorName) => {
-  const apiUrl = `http://47.97.59.189:5000/search_by_director/${actorName}`;
+  const apiUrl = `http://47.97.59.189:5000/search_by_actor_neo4j/${actorName}`;
 
   fetch(apiUrl)
     .then(response => response.json())
@@ -346,7 +346,7 @@ const Neo4jSearchMoviesByActor = (actorName) => {
 
 // 改成正确URL！！！！！！！！！
 const HiveSearchMoviesByActor = (actorName) => {
-  const apiUrl = `http://127.0.0.1:5000/search_by_director_hive/${actorName}`;
+  const apiUrl = `http://127.0.0.1:5000/search_by_actor_hive/${actorName}`;
 
   fetch(apiUrl)
     .then(response => response.json())

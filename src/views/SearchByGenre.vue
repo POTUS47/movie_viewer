@@ -244,7 +244,7 @@
   // 需要修改成正确URL！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
   const performSearchneo = () => {
     // 构建 API 请求 URL
-    const apiUrl = `http://47.97.59.189:5000/search_every_genre/${searchQuery.value}`;
+    const apiUrl = `http://47.97.59.189:5000/search_every_genre_neo4j/${searchQuery.value}`;
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
@@ -323,7 +323,7 @@
   
   // 改成正确的URL！！！！！！！！！！！！！！！！！
   const Neo4jSearchMoviesByGenre = (genreName) => {
-    const apiUrl = `http://47.97.59.189:5000/search_by_genre/${genreName}`;
+    const apiUrl = `http://47.97.59.189:5000/search_by_genre_neo4j/${genreName}`;
   
     fetch(apiUrl)
       .then(response => response.json())

@@ -246,7 +246,7 @@ const SqlSearchGroups = (genreName) => {
 
 // 改成正确的URL！！！！！！！！！！！！！！！！！
 const Neo4jSearchGroups = (genreName) => {
-    const apiUrl1 = `http://47.97.59.189:5000/search_actor_combinations_by_genre/${(genreName)}`;
+    const apiUrl1 = `http://47.97.59.189:5000/search_actor_combinations_by_genre_neo4j/${(genreName)}`;
     fetch(apiUrl1)
         .then(response => response.json())
         .then(data => {

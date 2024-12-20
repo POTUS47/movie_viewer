@@ -26,7 +26,19 @@ app.add_url_rule('/search_by_rate/',view_func=get_movies_by_score,methods=['GET'
 
 
 # 注册 Neo4j 查询路由
-app.add_url_rule('/search_by_title_neo4j/<string:movie_name>', view_func=search_by_title_neo4j, methods=['GET'])
+app.add_url_rule('/search_by_title_neo4j/<string:title>', view_func=search_by_title_neo4j, methods=['GET'])
+app.add_url_rule('/search_by_time_neo4j/',view_func=search_by_time_neo4j,methods=['GET'])
+app.add_url_rule('/search_every_director_neo4j/<string:name>', view_func=search_every_director_neo4j, methods=['GET'])
+app.add_url_rule('/search_by_director_neo4j/<string:name>', view_func=search_by_director_neo4j, methods=['GET'])
+app.add_url_rule('/search_every_actor_neo4j/<string:name>', view_func=search_every_actor_neo4j, methods=['GET'])
+app.add_url_rule('/search_by_actor_neo4j/<string:name>', view_func=search_by_actor_neo4j, methods=['GET'])
+app.add_url_rule('/search_every_genre_neo4j/<string:name>', view_func=search_every_genre_neo4j, methods=['GET'])
+app.add_url_rule('/search_by_genre_neo4j/<string:name>', view_func=search_by_genre_neo4j, methods=['GET'])
+app.add_url_rule('/relation_actor_actor_neo4j/<string:name>', view_func=relation_actor_actor_neo4j, methods=['GET'])
+app.add_url_rule('/relation_actor_director_neo4j/<string:name>', view_func=relation_actor_director_neo4j, methods=['GET'])
+app.add_url_rule('/relation_director_actor_neo4j/<string:name>', view_func=relation_director_actor_neo4j, methods=['GET'])
+app.add_url_rule('/search_actor_combinations_by_genre_neo4j/<string:genre_name>', view_func=search_actor_combinations_by_genre_neo4j, methods=['GET'])
+app.add_url_rule('/search_by_rate_neo4j/',view_func=search_by_rate_neo4j,methods=['GET'])
 
 
 

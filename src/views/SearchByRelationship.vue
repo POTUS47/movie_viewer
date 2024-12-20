@@ -303,10 +303,10 @@ const performSearchneo = () => {
     let apiUrl1 = '';
     if (queryType.value === 'actor') {
         apiUrl1 = actorQueryOption.value === 'co-actor'
-            ? `http://47.97.59.189:5000/relation_actor_actor/${entityName.value}`
-            : `http://47.97.59.189:5000/relation_actor_director/${entityName.value}`;
+            ? `http://47.97.59.189:5000/relation_actor_actor_neo4j/${entityName.value}`
+            : `http://47.97.59.189:5000/relation_actor_director_neo4j/${entityName.value}`;
     } else if (queryType.value === 'director') {
-        apiUrl1 = `http://47.97.59.189:5000/relation_director_actor/${entityName.value}`;
+        apiUrl1 = `http://47.97.59.189:5000/relation_director_actor_neo4j/${entityName.value}`;
     }
 
     fetch(apiUrl1)
