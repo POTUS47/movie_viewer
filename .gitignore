@@ -27,3 +27,4 @@ package.json
 package-lock.json
 package.json
 dist_electron/package.json
+dist_electron/index.js
